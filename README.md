@@ -1,3 +1,6 @@
+## Description
+web tool that analyzes X profiles to predict depression, Leveraging a Kaggle dataset and a support vector machine (SVM) algorithm, the system uses natural language processing to identify patterns correlated with signs of depression. Users can enter their X username to receive a personalized depression risk percentage and tailored recommendations, empowering them to proactively monitor their mental well-being.
+
 ## Dataset
 The `Suicide_Detection.csv` file is required to run this project. You can download it directly from Kaggle:
 
