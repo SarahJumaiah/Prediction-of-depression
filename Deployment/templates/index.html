@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Petrona&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet" />
+    <title>Depression test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+    <body>
+    <section>
+
+    <nav>
+
+ <!-- Menu Bar -->
+ <div class="menu-bar" id="MenuBar">
+    <i class="fas fa-times" onclick="hideMenu()"></i> <!--احتمال ينحذف --> 
+    <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="#self-test">SELF-TEST</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+
+    </ul>
+</div>
+<i class="fas fa-bars" onclick="showMenu()"></i>
+ <!--احتمال ينحذف --> 
+    </nav>
+
+    <img class="header" src="img/mobile-img-06.jpg" />
+
+<div class="title">
+<h1>Embrace A Journey Of Self-Care</h1>
+<p>Empower your mental well-being by Entering your X username.<br>
+ Gain personalized insights and resources to understand and address depression. <br>
+     Discover valuable knowledge about your well-being and take proactive steps towards self-care.<br>
+     Join us today for a transformative journey towards a happier, healthier you. <br>
+    </p>
+<a href="index3.html" class="btn">To Now More About The Test</a> <!--back hereeeeeeeeee-->
+</div>
+
+<!------test------>
+<section class="testdep">
+<h1>SerenityScale: Depression Evaluation Test</h1>
+<p>The SerenityScale is a depression evaluation test that provides a positive, negative, or neutral result. <br>Based on the result, tailored recommendations are offered to assist individuals in seeking appropriate support and resources for their emotional well-being.</p>
+</section>
+
+<div class="row">
+<div class="test-col">
+<h3>Low Depression</h3>
+<p>Mild depressive symptoms that may cause occasional sadness, loss of interest, and low energy.</p>
+</div>
+
+<div class="test-col">
+    <h3>Intermediate Depression</h3>
+<p>Moderate depressive symptoms that can lead to persistent sadness, changes in appetite and sleep, difficulty concentrating, and decreased energy levels.
+</p>
+
+</div>
+
+<div class="test-col">
+    <h3>High Depression</h3>
+<p>Significant depressive symptoms detected. Professional assistance strongly recommended.</p>
+
+</div>
+</div>
+</section>
+
+<!--log in to x -->
+<section id="self-test" class="LogIn">
+    <h1>Start Now</h1>
+    <p>Ready to explore? Enter your username for the depression test and start your journey now.</p>
+    <div class="x">
+            <br><br><br>
+    <form id="predictionForm" method="POST">  
+        <label for="username">Enter Your Username:</label><br><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <button type="submit" class="submit-button" >Submit</button>
+    </form>
+    <br>                                              
+</div>  
+<script>
+     document.getElementById("predictionForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            //localStorage.clear();
+            var username = document.getElementById("username").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:5000/api/get_posts", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    localStorage.clear();                    
+                    var responseObject = JSON.parse(xhr.responseText);
+
+        // Extract the value of the "overall_depression_status" property
+        var overallDepressionStatus = responseObject.overall_status;
+
+        // Store the value in localStorage
+        localStorage.setItem("overallDepressionStatus", overallDepressionStatus);
+
+                    // Redirect to prediction_page.html
+                    window.location.href = "prediction_page.html";
+                }
+            };
+            xhr.send(JSON.stringify({ "username": username }));
+        });
+    </script>   
+    
+
+<!--feedBack form users -->
+<section class="feedBack">
+<h1>What Our Users Say </h1>
+<p>Gain inspiration from authentic user experiences with our depression test</p>
+<div class="row">
+    <div class="feedBack-col">
+       <!--<img src="img/user_1.jpeg" >--> 
+        <div>
+        <p> The depression test was eye-opening! It helped me gain valuable insights into my emotional well-being.
+             The results were clear, and the recommendations provided me with a roadmap for seeking support. 
+             Highly recommended!</p>
+             <h3>Ethan Wilson </h3>
+
+
+        </div>
+    </div>
+    <div class="feedBack-col">
+    <!-- <img src="img/user_2.jpeg" > -->
+        <div>
+            <p>The depression test was a game-changer! It accurately captured my emotions and provided valuable results.
+             The recommendations were practical and empowering.
+              A fantastic resource for anyone on a quest for self-discovery.</p>
+             <h3>Olivia Hernandez </h3>
+
+        </div>
+    </div>
+</div>
+</section>
+
+
+<!--footer -->
+<section class="footer">
+<h4>About Us</h4>
+<p>We're here to lend a helping hand to X users <br> detecting their depression levels and offering friendly recommendations tailored just for them.</p>
+<div class="icons">
+    <i class="fab fa-instagram"></i>
+    <i class="fab fa-facebook"></i>
+    <i class="fab fa-twitter"></i><br>
+    <p><br>Made With <i class="fas fa-heart"></i></p>
+
+</div>
+
+</section>
+<!--js code--> 
+   <script>
+  
+var MenuBar = document.getElementById("MenuBar");
+
+function showMenu(){
+MenuBar.style.right="0";}
+
+function hideMenu(){
+MenuBar.style.right="-200px";}
+   </script>
+<!--end js code--> 
+
+</body>
+<style>
+
+*{
+    margin: 0%;
+    padding: 0%;
+    
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: none;
+}
+
+    .header{
+min-height: 100vh;
+width: 100%;
+background-position: center; /* احتمال ينحذف */
+background-size:cover;/* احتمال ينحذف */
+position: relative;/* احتمال ينحذف */
+    }
+
+    nav{
+display: flex;
+padding:2% 6% ;
+justify-content: space-between;
+align-items: center;
+    }
+
+     .menu-bar{
+
+flex: 1;
+text-align: right;
+    }
+    .menu-bar ul li{
+
+list-style: none;
+display: inline-block;
+padding: 8px 12px;
+position: relative;
+    }
+  
+    .menu-bar ul li a{
+        color: #000000;
+        text-decoration: none; 
+        font-size: 13px;}
+
+        .menu-bar ul li ::after{
+content: '';
+width: 0px;
+height: 5px;
+background:#d3aef0;
+display:block;
+margin: auto;
+transition: 0.5s;
+        }
+        .menu-bar ul li :hover::after{
+            width: 100px;
+
+        }
+        .title{
+width:90%;
+color: #fff;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+text-align: center;
+
+}
+.title h1{
+font-size: 45px;
+
+
+}
+.title p{
+margin: 10px 0 40px;
+font-size: 14px;
+color:#fff
+}
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #fff; /* Corrected 'sold' to 'solid' and reduced the border width */
+    padding: 13px; /* Adjusted padding */
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.btn:hover{
+border: 2px solid #d3aef0;
+background: #d3aef0;
+transition: 0.5s;
+}
+nav .fas{ 
+display: none;}
+@media(max-width : 700px) {
+    .title h1{
+        font-size: 20px;
+    }
+    .menu-bar ul li {
+        display: block;
+    }
+    .menu-bar{
+    position: absolute;
+    background: #d3aef0;
+    height: 100vh;
+    width: 200px;
+    top: 0px;
+    right: -200px;
+    text-align: left;
+    z-index: 2;
+    transition: 1s;
+
+    }
+     /* احتمال ينحذف */
+     nav .fas{ 
+display: block;
+color: #000000;
+margin: 10px;
+font-size: 22px;
+cursor: pointer;
+}
+.menu-bar ul{
+    padding: 30px;
+}
+.row.test-col{
+ margin-bottom: 20px;}
+
+    .feedBack-col img {/* احتاج اعدل هذا الجزء */
+        margin-left: 0px; /* Increase the left margin */
+        margin-right: 15px; /* Increase the right margin */ 
+
+      }
+}
+
+/*------test------*/
+.testdep{
+width: 80%;
+margin: auto;
+text-align: center;
+padding-top: 100px;
+
+}
+
+h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between; 
+
+}
+.test-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 30%;
+    background: #eedcfc;
+    border-radius: 15px;
+    margin-bottom: 5%;
+    margin: 0 20px;
+    padding: 20px 12px;
+    box-sizing: border-box; 
+    transition: 0.5s;
+}
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin-top: 10px 0;
+}
+.test-col:hover{
+box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
+
+}
+.LogIn{
+width: 80%;
+margin: auto;
+text-align: center;
+padding-top: 10%;
+
+}
+.x{
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+
+}
+.x label{
+    font-size: 25px;
+}
+.x  input[type="text"] {
+      width: 300px;
+      height: 40px;
+      font-size: 16px;
+    }
+/*.x img{
+width: 55%;
+
+} */
+/*.layer{
+background: transparent;
+height: 99%;
+width:55%;
+position: absolute;
+top: 0;
+left: 22.5%;
+transition: 0.5s;
+}
+.layer:hover{
+    background:rgba(211, 174, 240, 0.5);/*ما عجبني اللون*/
+
+.layer h3{
+width:100%;
+font-weight: 500;
+color: #fff;
+font-size: 26px;
+bottom: 0;
+left: 50%;
+transform: translate(-50%);
+position: absolute;
+opacity: 0;
+transition: 0.5s;
+}
+.layer:hover h3{
+    bottom: 49%;
+    opacity: 1;
+}
+
+.feedBack{
+width: 80%;
+margin: auto;
+padding-top: 8%;
+text-align: center;
+
+}
+
+.feedBack-col{
+
+flex-basis: 44%;
+border-radius: 10px;
+margin-bottom: 5%;
+text-align: left;
+background: #eedcfc;
+padding: 20px;
+cursor: pointer;
+display: flex;
+
+}
+
+.feedBack-col img{
+
+height: 40px;
+margin-left: 5px;
+margin-right: 30px;
+border-radius: 50%;
+}
+
+.feedBack-col p{
+padding: 0;
+}
+.feedBack-col h3{
+margin-top: 15px;
+text-align: left;
+}
+
+.feedBack-col .fas {
+    color: rgb(250, 166, 64);
+}
+
+.footer{
+width: 100%;
+text-align: center;
+padding: 30px 0;
+
+}
+.footer h4{
+margin-bottom: 25px;
+margin-top: 20px;
+font-weight: 600;
+}
+.fab {
+    color: #5f278d;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+
+.fas.fa-heart {
+    color: #d3aef0;
+}
+
+</style>
+</html>
+
